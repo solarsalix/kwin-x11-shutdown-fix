@@ -1,0 +1,15 @@
+[Unit]
+Description="Fix KWin (X11) hang on shutdown"
+DefaultDependencies=no
+After=dbus.socket dbus.service
+Before=shutdown.target reboot.target halt.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/true
+ExecStop=%h/.local/bin/kwin-x11-shutdown-hang-fix.sh
+RemainAfterExit=yes
+TimeoutStartSec=15s
+
+[Install]
+WantedBy=default.target
